@@ -31,7 +31,8 @@ const DocumentSchema = mongoose.Schema({
     type: String,
   },
   createDate: {
-    type: Date.now,
+    type: Date,
+    default: Date.now,
   },
 });
 
