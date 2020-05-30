@@ -4,9 +4,10 @@ const connectDB = require('./config/db');
 const app = express();
 connectDB();
 
-app.use('/', (req, res) => {
-  res.send('Welcome to express!');
-});
+// Allows express to be able to parse json
+app.use(express.json({ extended: false }));
+
+app.use('/api/users', require('./routes/users'));
 
 const PORT = process.env.PORT || 5000;
 
