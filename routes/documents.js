@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Document = require('../models/DocumentModel');
 
@@ -7,8 +8,11 @@ const Document = require('../models/DocumentModel');
 router.post(
   '/',
   [
-    check('name', 'Name is required.').not().isEmpty(),
-    check('deviceType', 'Device type is required.').not().isEmpty(),
+    auth,
+    [
+      check('name', 'Name is required.').not().isEmpty(),
+      check('deviceType', 'Device type is required.').not().isEmpty(),
+    ],
   ],
 
   async (req, res) => {
@@ -25,7 +29,6 @@ router.post(
       licenseStart,
       licenseExpire,
       notes,
-      createdBy,
     } = req.body;
 
     try {
@@ -38,7 +41,7 @@ router.post(
         licenseStart,
         licenseExpire,
         notes,
-        createdBy,
+        user: req.user.id,
       });
       const document = await newDocument.save();
       res.json(document);
