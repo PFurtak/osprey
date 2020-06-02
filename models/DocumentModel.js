@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const DocumentSchema = mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+  },
   name: {
     type: String,
     required: true,
@@ -25,9 +29,6 @@ const DocumentSchema = mongoose.Schema({
     type: Date,
   },
   notes: {
-    type: String,
-  },
-  createdBy: {
     type: String,
   },
   createDate: {
