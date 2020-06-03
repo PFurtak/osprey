@@ -52,4 +52,19 @@ router.post(
   }
 );
 
+// Get route for api/documents
+// Gets all documents for logged in users
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const documents = await Document.find({}).sort({
+      date: -1,
+    });
+    res.json(documents);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
