@@ -67,7 +67,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// PUT route for api/documents
+// PUT route for api/documents/:id
 // Updates existing document
 router.put('/:id', auth, async (req, res) => {
   const {
@@ -102,6 +102,21 @@ router.put('/:id', auth, async (req, res) => {
       { new: true }
     );
     res.json(document);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error.');
+  }
+});
+
+// DELETE route for api/documents/:id
+// Delete document
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    let document = await Document.findById(req.params.id);
+    if (!document) return res.status(404).json({ msg: 'Not Authorized' });
+
+    await Document.findByIdAndRemove(req.params.id);
+    res.json({ msg: 'Document removed.' });
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error.');
