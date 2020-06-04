@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Issue = require('../models/IssueModel');
 
@@ -7,9 +8,12 @@ const Issue = require('../models/IssueModel');
 router.post(
   '/',
   [
-    check('deviceName', 'Device name is required.').not().isEmpty(),
-    check('issueType', 'Type of issue field is required.').not().isEmpty(),
-    check('issueDescription', 'Please describe the issue.').not().isEmpty(),
+    auth,
+    [
+      check('deviceName', 'Device name is required.').not().isEmpty(),
+      check('issueType', 'Type of issue field is required.').not().isEmpty(),
+      check('issueDescription', 'Please describe the issue.').not().isEmpty(),
+    ],
   ],
 
   async (req, res) => {
@@ -24,7 +28,6 @@ router.post(
       issueType,
       issueSeverity,
       issueDescription,
-      createdBy,
     } = req.body;
 
     try {
@@ -35,7 +38,7 @@ router.post(
         issueType,
         issueSeverity,
         issueDescription,
-        createdBy,
+        user: req.user.id,
       });
       const issue = await newIssue.save();
       res.json(issue);
@@ -45,5 +48,19 @@ router.post(
     }
   }
 );
+
+//GET route for /api/issues
+//GET all issues
+router.get('/', auth, async (req, res) => {
+  try {
+    const issues = await Issue.find({}).sort({
+      date: -1,
+    });
+    res.json(issues);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
