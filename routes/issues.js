@@ -99,4 +99,19 @@ router.put('/:id', auth, async (req, res) => {
   }
 });
 
+// DELETE request to /api/issues/:id
+// Delete an issue by ID
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    let issue = await Issue.findById(req.params.id);
+    if (!issue) return res.status(404).json({ msg: 'Not Authorized' });
+
+    await Issue.findByIdAndRemove(req.params.id);
+    res.json({ msg: 'Issue removed.' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server error.');
+  }
+});
+
 module.exports = router;
