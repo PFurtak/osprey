@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const IssueSchema = mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users',
+  },
   deviceName: {
     type: String,
     required: true,
@@ -21,9 +25,6 @@ const IssueSchema = mongoose.Schema({
   issueDescription: {
     type: String,
     required: true,
-  },
-  createdBy: {
-    type: String,
   },
   issueDate: {
     type: Date,
