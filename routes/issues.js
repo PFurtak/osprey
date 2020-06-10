@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Issue = require('../models/IssueModel');
+const User = require('../models/UserModel');
 
 // Post route for issues /api/issues
 router.post(
@@ -111,6 +112,77 @@ router.delete('/:id', auth, async (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error.');
+  }
+});
+
+//@route POST api/issues/comment/:id
+//@desc Comment on issue
+//@access private
+router.post(
+  '/comment/:id',
+  [auth, [check('text', 'Text is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+
+      const issue = await Issue.findById(req.params.id);
+
+      const newComment = {
+        text: req.body.text,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        user: req.user.id,
+      };
+
+      issue.comments.unshift(newComment);
+
+      await issue.save();
+
+      res.json(issue.comments);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+//@route DELETE api/issues/comment/:id/:comment_id
+//@desc remove comment on issue
+//@access private
+router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
+  try {
+    const issue = await Issue.findById(req.params.id);
+
+    // pull comment from issue
+    const comment = issue.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+
+    if (!comment) {
+      return res.status(404).json({ msg: 'Comment not found' });
+    }
+
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User is not authorized' });
+    }
+
+    const removeIndex = issue.comments
+      .map((comment) => comment.user.toString())
+      .indexOf(req.user.id);
+
+    issue.comments.splice(removeIndex, 1);
+
+    await issue.save();
+
+    res.json(issue.comments);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
   }
 });
 
