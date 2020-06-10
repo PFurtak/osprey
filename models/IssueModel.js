@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const IssueSchema = mongoose.Schema({
+const IssueSchema = new Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'users',
   },
   deviceName: {
@@ -25,6 +26,32 @@ const IssueSchema = mongoose.Schema({
   issueDescription: {
     type: String,
     required: true,
+  },
+  comments: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+      },
+      text: {
+        type: String,
+        required: true,
+      },
+      firstName: {
+        type: String,
+      },
+      lastName: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  resolved: {
+    type: Boolean,
+    default: false,
   },
   issueDate: {
     type: Date,
