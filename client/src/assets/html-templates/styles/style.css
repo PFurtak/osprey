@@ -1,3 +1,29 @@
+/* 
+--- Colors: ---
+Rich black: #0D1321
+Ivory: #feffea
+Midnight green: #19535f
+Lavender: #dadff7
+Metallic Seaweed: #177e89
+*/
+
+/* Global settings */
 * {
-  background-color: black;
+  margin: 0;
+  padding: 0;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+/* CTA */
+
+/* Navbar */
