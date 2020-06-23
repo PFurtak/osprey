@@ -5,6 +5,9 @@ Ivory: #feffea
 Midnight green: #19535f
 Lavender: #dadff7
 Metallic Seaweed: #177e89
+grey-dark-1: #333;
+grey-dark-2: #777;
+grey-dark-3: #999;
 */
 
 /* Global settings */
@@ -25,5 +28,44 @@ html {
 }
 
 /* CTA */
+
+.header {
+  width: 100%;
+  height: 30rem;
+  background-image: linear-gradient(to bottom, #19535f, #177e89);
+  border-bottom: 1px solid #999;
+  box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.3);
+}
+
+.CTA__container {
+  margin: 0 5rem;
+  border: 1pc sold black;
+}
+
+.CTA__heading--primary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 3rem;
+  color: #333;
+}
+
+.CTA__heading--secondary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+.CTA__buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
 
 /* Navbar */
