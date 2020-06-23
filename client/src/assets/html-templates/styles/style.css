@@ -37,12 +37,29 @@ html {
   box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.3);
 }
 
+.CTA {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
 .CTA__container {
-  margin: 0 5rem;
-  border: 1pc sold black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  border: 1px solid #999;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 80%;
+  margin: -15rem;
+  background-color: white;
+  box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.3);
 }
 
 .CTA__heading--primary {
+  font-family: 'Merriweather Sans', sans-serif;
+  margin: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -53,6 +70,8 @@ html {
 }
 
 .CTA__heading--secondary {
+  font-family: 'Varela Round', sans-serif;
+  margin: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -64,8 +83,34 @@ html {
 
 .CTA__buttons {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin-top: 2rem;
+  margin-bottom: 7rem;
 }
+
+.CTA__buttons--login {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 2.5rem;
+  width: 30rem;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #177e89;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.2)
+}
+
+.CTA__buttons--signup {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 2.5rem;
+  width: 30rem;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #177e89;
+  margin-top: 0.5rem;
+  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.2)
 
 /* Navbar */
