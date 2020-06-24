@@ -99,7 +99,7 @@ html {
   border-radius: 8px;
   background-color: #177e89;
   margin-bottom: 0.5rem;
-  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.2)
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .CTA__buttons--signup {
@@ -111,6 +111,35 @@ html {
   border-radius: 8px;
   background-color: #177e89;
   margin-top: 0.5rem;
-  box-shadow: 0 1rem 2rem rgba(0,0,0, 0.2)
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
 
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.login__form--email {
+  padding: 1rem;
+  width: 65%;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+.login__form--password {
+  padding: 1rem;
+  width: 65%;
+  margin-top: 0.75rem;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+.CTA__buttons--login-submit {
+  margin-top: 2rem;
+}
 /* Navbar */
