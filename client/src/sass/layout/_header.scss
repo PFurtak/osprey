@@ -1,0 +1,36 @@
+.header {
+  height: 90vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary, 0.55),
+      rgba($color-secondary, 0.55)
+    ),
+    url('../assets/img/office-img-large.jpg');
+  background-size: cover;
+  background-position: top;
+
+  @media (min-resolution: 192dpi) and (min-width: 37.5em), (min-width: 125em) {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary, 0.55),
+        rgba($color-primary, 0.55)
+      ),
+      url('../assets/img/office-img-large.jpg');
+  }
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  position: relative;
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    text-transform: uppercase;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}
