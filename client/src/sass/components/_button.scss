@@ -9,10 +9,11 @@
     border-radius: 0.5rem;
     transition: all 0.2s;
     position: relative;
-    font-size: $default-font-size;
+    font-size: 2rem;
     border: none;
     cursor: pointer;
     margin: 2rem;
+    width: 17rem;
   }
 
   &--white {
@@ -79,6 +80,7 @@
     text-transform: uppercase;
     transition: all 0.2s;
   }
+
   &:hover {
     background-color: $color-primary;
     color: $color-white;
