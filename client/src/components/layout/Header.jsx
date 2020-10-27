@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { Box, Heading, Flex, Text, Button } from "@chakra-ui/core";
 
 const MenuItems = ({ children }) => (
@@ -24,7 +25,7 @@ const Header = props => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="lg">
-          Osprey
+        <Link to='/'>Osprey</Link>
         </Heading>
       </Flex>
 
@@ -46,9 +47,9 @@ const Header = props => {
         alignItems="center"
         flexGrow={1}
       >
-        <MenuItems>Docs</MenuItems>
-        <MenuItems>Issues</MenuItems>
-        <MenuItems>About</MenuItems>
+        <MenuItems><Link to='/docs'>Docs</Link></MenuItems>
+        <MenuItems><Link to='/issues'>Issues</Link></MenuItems>
+        <MenuItems><Link to='/about'>About</Link></MenuItems>
       </Box>
 
       <Box
@@ -56,11 +57,11 @@ const Header = props => {
         mt={{ base: 4, md: 0 }}
       >
         <Button bg="transparent" border="1px" marginRight="10px">
-          Sign Up
+          <Link to='/signup'> Sign Up </Link>
         </Button>
 
         <Button bg="transparent" border="1px">
-          Sign In
+          <Link to='/login'> Sign In </Link>
         </Button>
       </Box>
     </Flex>
