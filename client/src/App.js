@@ -6,6 +6,11 @@ import setAuthToken from '../src/utils/setAuthToken';
 import Header from './components/layout/Header';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import About from './components/pages/About';
+import Docs from './components/pages/Docs';
+import Home from './components/pages/Home';
+import Issues from './components/pages/Issues';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 const breakpoints = ['160px', '768px', '1024px', '1440px'];
 breakpoints.sm = breakpoints[0];
@@ -30,6 +35,10 @@ function App() {
         <Router>
           <Header />
           <Switch>
+            <PrivateRoute exact path='/about' component={About} />
+            <PrivateRoute exact path='/docs' component={Docs} />
+            <PrivateRoute exact path='/issues' component={Issues} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/signin' component={SignIn} />
             <Route exact path='/signup' component={SignUp} />
           </Switch>
