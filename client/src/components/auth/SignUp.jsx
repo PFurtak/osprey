@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
+import ErrorMessage from '../Alert/ErrorMessage';
 import {
   Flex,
   Box,
@@ -14,7 +15,7 @@ import {
 const SignUp = (props) => {
 
     const authContext = useContext(AuthContext);
-    const { register, error, clearErrors, isAuthenticated } = authContext;
+    const { register, error, isAuthenticated } = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -53,6 +54,7 @@ const SignUp = (props) => {
           </Box>
           <Box my={4} textAlign="left">
             <form onSubmit={onSubmit}>
+            {error && <ErrorMessage error={error} />}
             <FormControl isRequired>
                 <FormLabel>First Name</FormLabel>
                 <Input type="text" name="firstName" value={firstName} placeholder="Michael" size="lg" onChange={onChange}/>

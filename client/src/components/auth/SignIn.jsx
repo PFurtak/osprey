@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
+import ErrorMessage from '../Alert/ErrorMessage';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -8,13 +9,13 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Button
+  Button,
 } from '@chakra-ui/core';
 
 const SignIn = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { login, isAuthenticated } = authContext;
+  const { login, error, isAuthenticated } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -22,7 +23,7 @@ const SignIn = (props) => {
     }
 
     // eslint-disable-next-line
-  }, [isAuthenticated, props.history]);
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     email: '',
@@ -49,6 +50,7 @@ const SignIn = (props) => {
           </Box>
           <Box my={4} textAlign="left">
             <form onSubmit={onSubmit}>
+            {error && <ErrorMessage error={error} />}
               <FormControl isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input type="email" name="email" value={email} placeholder="test@test.com" size="lg" onChange={onChange}/>
