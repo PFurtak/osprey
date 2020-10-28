@@ -1,8 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { theme, ThemeProvider, CSSReset } from '@chakra-ui/core';
+import AuthState from './context/auth/authState';
+import setAuthToken from '../src/utils/setAuthToken';
 import Header from './components/layout/Header';
-import Login from './components/auth/Login';
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
+import About from './components/pages/About';
+import Docs from './components/pages/Docs';
+import Home from './components/pages/Home';
+import Issues from './components/pages/Issues';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 const breakpoints = ['160px', '768px', '1024px', '1440px'];
 breakpoints.sm = breakpoints[0];
@@ -15,17 +23,28 @@ const newTheme = {
   breakpoints,
 };
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 function App() {
   return (
-    <ThemeProvider theme={newTheme}>
-      <CSSReset />
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path='/login' component={Login} />
-        </Switch>
-      </Router>
-    </ThemeProvider>
+    <AuthState>
+      <ThemeProvider theme={newTheme}>
+        <CSSReset />
+        <Router>
+          <Header />
+          <Switch>
+            <PrivateRoute exact path='/docs' component={Docs} />
+            <PrivateRoute exact path='/issues' component={Issues} />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/signin' component={SignIn} />
+            <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/about' component={About} />
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </AuthState>
   );
 }
 

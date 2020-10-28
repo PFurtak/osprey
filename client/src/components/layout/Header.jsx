@@ -56,13 +56,17 @@ const Header = props => {
         display={{ sm: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button bg="transparent" border="1px" marginRight="10px">
-          <Link to='/signup'> Sign Up </Link>
+        <Link to='/signup'>
+        <Button variantColor="teal" border="1px" marginRight="10px">
+           Sign Up 
         </Button>
+        </Link>
 
-        <Button bg="transparent" border="1px">
-          <Link to='/login'> Sign In </Link>
+        <Link to='/signin'>
+        <Button variantColor="teal" border="1px">
+           Sign In 
         </Button>
+        </Link>
       </Box>
     </Flex>
   );
