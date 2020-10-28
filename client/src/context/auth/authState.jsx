@@ -12,6 +12,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  SET_LOADING,
 } from '../types';
 
 const AuthState = (props) => {
@@ -24,6 +25,11 @@ const AuthState = (props) => {
   };
 
   const [state, dispatch] = useReducer(authReducer, initialState);
+
+  // set loading to true
+  const setLoading = () => {
+    dispatch({ type: SET_LOADING, payload: null})
+  }
 
   // Load user
   const loadUser = async () => {
@@ -103,6 +109,7 @@ const AuthState = (props) => {
         register,
         clearErrors,
         loadUser,
+        setLoading,
       }}>
       {props.children}
     </AuthContext.Provider>

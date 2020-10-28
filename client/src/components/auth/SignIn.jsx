@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
-import ErrorMessage from '../Alert/ErrorMessage';
+import ErrorMessage from '../alert/ErrorMessage';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -15,7 +15,7 @@ import {
 const SignIn = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { login, error, isAuthenticated } = authContext;
+  const { login, error, isAuthenticated, setLoading } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -35,6 +35,7 @@ const SignIn = (props) => {
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
+    setLoading();
     e.preventDefault();
       login({
         email,

@@ -35,12 +35,12 @@ function App() {
         <Router>
           <Header />
           <Switch>
-            <PrivateRoute exact path='/about' component={About} />
             <PrivateRoute exact path='/docs' component={Docs} />
             <PrivateRoute exact path='/issues' component={Issues} />
             <Route exact path='/' component={Home} />
             <Route exact path='/signin' component={SignIn} />
             <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/about' component={About} />
           </Switch>
         </Router>
       </ThemeProvider>

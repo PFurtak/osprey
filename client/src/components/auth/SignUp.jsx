@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
-import ErrorMessage from '../Alert/ErrorMessage';
+import ErrorMessage from '../alert/ErrorMessage';
 import {
   Flex,
   Box,
@@ -15,7 +15,7 @@ import {
 const SignUp = (props) => {
 
     const authContext = useContext(AuthContext);
-    const { register, error, isAuthenticated } = authContext;
+    const { register, error, isAuthenticated, setLoading } = authContext;
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -37,6 +37,7 @@ const SignUp = (props) => {
       const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
       const onSubmit = (e) => {
+        setLoading();
         e.preventDefault();
           register({
             firstName,
