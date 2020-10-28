@@ -55,19 +55,19 @@ const SignUp = (props) => {
             <form onSubmit={onSubmit}>
             <FormControl isRequired>
                 <FormLabel>First Name</FormLabel>
-                <Input type="text" name="firstName" placeholder="Michael" size="lg" onChange={onChange}/>
+                <Input type="text" name="firstName" value={firstName} placeholder="Michael" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Last Name</FormLabel>
-                <Input type="text" name="lastName" placeholder="Scott" size="lg" onChange={onChange}/>
+                <Input type="text" name="lastName" value={lastName} placeholder="Scott" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Email</FormLabel>
-                <Input type="email" name="email" placeholder="m.scott@paperco.com" size="lg" onChange={onChange}/>
+                <Input type="email" name="email" value={email} placeholder="m.scott@paperco.com" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" name="password" placeholder="*******" size="lg" onChange={onChange}/>
+                <Input type="password" name="password" value={password} placeholder="*******" size="lg" onChange={onChange}/>
               </FormControl>
               <Button variantColor="teal" width="full" mt={4} type="submit">
                 Sign Up

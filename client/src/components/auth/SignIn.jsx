@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
 import { Link } from 'react-router-dom';
 import {
   Flex,
@@ -10,13 +11,35 @@ import {
   Button
 } from '@chakra-ui/core';
 
-export default function SignIn() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const handleSubmit = event => {
-      event.preventDefault();
-      alert(`Email: ${email} & Password: ${password}`);
-    };
+const SignIn = (props) => {
+
+  const authContext = useContext(AuthContext);
+  const { login, isAuthenticated } = authContext;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push('/docs');
+    }
+
+    // eslint-disable-next-line
+  }, [isAuthenticated, props.history]);
+
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  const { email, password } = user;
+
+  const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+      login({
+        email,
+        password,
+      });
+  };
 
     return (
         <Flex width="full" align="center" justifyContent="center">
@@ -25,14 +48,14 @@ export default function SignIn() {
             <Heading>Sign In</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
               <FormControl isRequired>
                 <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="test@test.com" size="lg" onChange={event => setEmail(event.currentTarget.value)}/>
+                <Input type="email" name="email" value={email} placeholder="test@test.com" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={6} isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" placeholder="*******" size="lg" onChange={event => setPassword(event.currentTarget.value)} />
+                <Input type="password" name="password" value={password} placeholder="*******" size="lg" onChange={onChange} />
               </FormControl>
               <Button variantColor="teal" width="full" mt={4} type="submit">
                 Sign In
@@ -46,3 +69,5 @@ export default function SignIn() {
       </Flex>
     );
   }
+
+  export default SignIn
