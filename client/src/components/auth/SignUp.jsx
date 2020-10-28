@@ -11,33 +11,38 @@ import {
 } from '@chakra-ui/core';
 
 export default function SignUp() {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirm, setConfirm] = useState('');
     const handleSubmit = event => {
       event.preventDefault();
-      alert(`Email: ${email} & Password: ${password} & Confirm: ${confirm} `);
+      alert(`First: ${firstName} Last: ${lastName} Email: ${email} Password: ${password}`);
     };
 
     return (
         <Flex width="full" align="center" justifyContent="center">
-        <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="60px">
+        <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="60px" marginBottom="60px">
           <Box textAlign="center">
             <Heading>Sign Up</Heading>
           </Box>
           <Box my={4} textAlign="left">
             <form onSubmit={handleSubmit}>
-              <FormControl isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="test@test.com" size="lg" onChange={event => setEmail(event.currentTarget.value)}/>
+            <FormControl isRequired>
+                <FormLabel>First Name</FormLabel>
+                <Input type="text" placeholder="Michael" size="lg" onChange={event => setFirstName(event.currentTarget.value)}/>
               </FormControl>
-              <FormControl mt={6} isRequired>
+              <FormControl mt={3} isRequired>
+                <FormLabel>Last Name</FormLabel>
+                <Input type="text" placeholder="Scott" size="lg" onChange={event => setLastName(event.currentTarget.value)}/>
+              </FormControl>
+              <FormControl mt={3} isRequired>
+                <FormLabel>Email</FormLabel>
+                <Input type="email" placeholder="m.scott@paperco.com" size="lg" onChange={event => setEmail(event.currentTarget.value)}/>
+              </FormControl>
+              <FormControl mt={3} isRequired>
                 <FormLabel>Password</FormLabel>
                 <Input type="password" placeholder="*******" size="lg" onChange={event => setPassword(event.currentTarget.value)} />
-              </FormControl>
-              <FormControl mt={6} isRequired>
-                <FormLabel>Confirm Password</FormLabel>
-                <Input type="password" placeholder="*******" size="lg" onChange={event => setConfirm(event.currentTarget.value)} />
               </FormControl>
               <Button variantColor="teal" width="full" mt={4} type="submit">
                 Sign Up

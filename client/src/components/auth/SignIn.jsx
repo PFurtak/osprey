@@ -20,7 +20,7 @@ export default function SignIn() {
 
     return (
         <Flex width="full" align="center" justifyContent="center">
-        <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="60px">
+        <Box p={8} maxWidth="500px" borderWidth={1} borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="60px" marginBottom="60px">
           <Box textAlign="center">
             <Heading>Sign In</Heading>
           </Box>
