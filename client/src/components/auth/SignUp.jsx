@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/auth/authContext';
 import {
   Flex,
   Box,
@@ -10,15 +11,39 @@ import {
   Button
 } from '@chakra-ui/core';
 
-export default function SignUp() {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const handleSubmit = event => {
-      event.preventDefault();
-      alert(`First: ${firstName} Last: ${lastName} Email: ${email} Password: ${password}`);
-    };
+const SignUp = (props) => {
+
+    const authContext = useContext(AuthContext);
+    const { register, error, clearErrors, isAuthenticated } = authContext;
+
+    useEffect(() => {
+        if (isAuthenticated) {
+          props.history.push('/docs');
+        }
+        // eslint-disable-next-line
+      }, [error, isAuthenticated, props.history]);
+
+
+    const [user, setUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      });
+
+      const { firstName, lastName, email, password } = user;
+
+      const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
+
+      const onSubmit = (e) => {
+        e.preventDefault();
+          register({
+            firstName,
+            lastName,
+            email,
+            password,
+          });
+        }
 
     return (
         <Flex width="full" align="center" justifyContent="center">
@@ -27,22 +52,22 @@ export default function SignUp() {
             <Heading>Sign Up</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onSubmit}>
             <FormControl isRequired>
                 <FormLabel>First Name</FormLabel>
-                <Input type="text" placeholder="Michael" size="lg" onChange={event => setFirstName(event.currentTarget.value)}/>
+                <Input type="text" name="firstName" placeholder="Michael" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Last Name</FormLabel>
-                <Input type="text" placeholder="Scott" size="lg" onChange={event => setLastName(event.currentTarget.value)}/>
+                <Input type="text" name="lastName" placeholder="Scott" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Email</FormLabel>
-                <Input type="email" placeholder="m.scott@paperco.com" size="lg" onChange={event => setEmail(event.currentTarget.value)}/>
+                <Input type="email" name="email" placeholder="m.scott@paperco.com" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Password</FormLabel>
-                <Input type="password" placeholder="*******" size="lg" onChange={event => setPassword(event.currentTarget.value)} />
+                <Input type="password" name="password" placeholder="*******" size="lg" onChange={onChange}/>
               </FormControl>
               <Button variantColor="teal" width="full" mt={4} type="submit">
                 Sign Up
@@ -56,3 +81,5 @@ export default function SignUp() {
       </Flex>
     );
   }
+
+  export default SignUp;

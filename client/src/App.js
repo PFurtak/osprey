@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { theme, ThemeProvider, CSSReset } from '@chakra-ui/core';
+import AuthState from './context/auth/authState';
+import setAuthToken from '../src/utils/setAuthToken';
 import Header from './components/layout/Header';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
@@ -16,18 +18,24 @@ const newTheme = {
   breakpoints,
 };
 
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
 function App() {
   return (
-    <ThemeProvider theme={newTheme}>
-      <CSSReset />
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path='/signin' component={SignIn} />
-          <Route exact path='/signup' component={SignUp} />
-        </Switch>
-      </Router>
-    </ThemeProvider>
+    <AuthState>
+      <ThemeProvider theme={newTheme}>
+        <CSSReset />
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path='/signin' component={SignIn} />
+            <Route exact path='/signup' component={SignUp} />
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </AuthState>
   );
 }
 
