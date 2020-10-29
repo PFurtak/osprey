@@ -1,8 +1,9 @@
 import React from 'react';
+import DocForm from '../docs/DocForm'
 
 const Docs = () => {
     return (
-        <h1>Docs</h1>
+        <DocForm />
     )
 }
 

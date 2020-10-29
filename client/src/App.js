@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { theme, ThemeProvider, CSSReset } from '@chakra-ui/core';
 import AuthState from './context/auth/authState';
+import DocState from './context/doc/DocState';
 import setAuthToken from '../src/utils/setAuthToken';
 import Header from './components/layout/Header';
 import SignIn from './components/auth/SignIn';
@@ -30,20 +31,22 @@ if (localStorage.token) {
 function App() {
   return (
     <AuthState>
-      <ThemeProvider theme={newTheme}>
-        <CSSReset />
-        <Router>
-          <Header />
-          <Switch>
-            <PrivateRoute exact path='/docs' component={Docs} />
-            <PrivateRoute exact path='/issues' component={Issues} />
-            <Route exact path='/' component={Home} />
-            <Route exact path='/signin' component={SignIn} />
-            <Route exact path='/signup' component={SignUp} />
-            <Route exact path='/about' component={About} />
-          </Switch>
-        </Router>
-      </ThemeProvider>
+      <DocState>
+        <ThemeProvider theme={newTheme}>
+          <CSSReset />
+          <Router>
+            <Header />
+            <Switch>
+              <PrivateRoute exact path='/docs' component={Docs} />
+              <PrivateRoute exact path='/issues' component={Issues} />
+              <Route exact path='/' component={Home} />
+              <Route exact path='/signin' component={SignIn} />
+              <Route exact path='/signup' component={SignUp} />
+              <Route exact path='/about' component={About} />
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      </DocState>
     </AuthState>
   );
 }
