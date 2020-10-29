@@ -19,5 +19,6 @@ export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const UPDATE_DOC = 'UPDATE_DOC';
 export const FILTER_DOCS = 'FILTER_DOCS';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
+export const DOC_ERROR = 'DOC_ERROR';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
