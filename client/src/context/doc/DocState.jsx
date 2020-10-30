@@ -42,7 +42,7 @@ const DocState = (props) => {
       },
     };
     try {
-      const res = await axios.post('/api/docs', doc, config);
+      const res = await axios.post('/api/documents', doc, config);
       dispatch({ type: ADD_DOC, payload: res.data });
     } catch (err) {
       dispatch({ type: DOC_ERROR, payload: err.response.msg });
