@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import DocContext from '../../context/doc/docContext';
 import AuthContext from '../../context/auth/authContext';
 import ErrorMessage from '../alert/ErrorMessage';
@@ -10,7 +9,8 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Button
+  Button,
+  Textarea
 } from '@chakra-ui/core';
 
 const DocForm = (props) => {
@@ -54,9 +54,9 @@ const DocForm = (props) => {
       const onChange = (e) => setDoc({ ...doc, [e.target.name]: e.target.value });
 
       const onSubmit = (e) => {
-        setLoading();
         e.preventDefault();
-          if (current !== null) {
+        setLoading();
+          if (current === null) {
               addDoc(doc);
           } else {
               updateDoc(doc)
@@ -78,26 +78,39 @@ const DocForm = (props) => {
             {error && <ErrorMessage error={error} />}
             <FormControl isRequired>
                 <FormLabel>Device Name</FormLabel>
-                <Input type="text" name="name" value={name} placeholder="Michael" size="lg" onChange={onChange}/>
+                <Input type="text" name="name" value={name} size="lg" onChange={onChange}/>
               </FormControl>
-              <FormControl mt={3} isRequired>
+              <FormControl mt={3}>
                 <FormLabel>Serial Number</FormLabel>
-                <Input type="text" name="deviceSerialNumber" value={deviceSerialNumber} placeholder="Scott" size="lg" onChange={onChange}/>
+                <Input type="text" name="deviceSerialNumber" value={deviceSerialNumber} size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3} isRequired>
                 <FormLabel>Type</FormLabel>
-                <Input type="text" name="deviceType" value={deviceType} placeholder="m.scott@paperco.com" size="lg" onChange={onChange}/>
+                <Input type="text" name="deviceType" value={deviceType} size="lg" onChange={onChange}/>
               </FormControl>
-              <FormControl mt={3} isRequired>
+              <FormControl mt={3}>
                 <FormLabel>IP Address</FormLabel>
-                <Input type="text" name="deviceIP" value={deviceIP} placeholder="*******" size="lg" onChange={onChange}/>
+                <Input type="text" name="deviceIP" value={deviceIP} placeholder="192.168.0.1" size="lg" onChange={onChange}/>
+              </FormControl>
+              <FormControl mt={3}>
+                <FormLabel>Location</FormLabel>
+                <Input type="text" name="deviceLocation" value={deviceLocation} placeholder="2nd floor server closet" size="lg" onChange={onChange}/>
+              </FormControl>
+              <FormControl mt={3}>
+                <FormLabel>License Start Date</FormLabel>
+                <Input type="text" name="licenseStart" value={licenseStart} placeholder="12/12/2027" size="lg" onChange={onChange}/>
+              </FormControl>
+              <FormControl mt={3}>
+                <FormLabel>License End Date</FormLabel>
+                <Input type="text" name="licenseExpire" value={licenseExpire} placeholder="12/12/2030" size="lg" onChange={onChange}/>
+              </FormControl>
+              <FormControl mt={3}>
+                <FormLabel>Notes</FormLabel>
+                <Textarea name="notes" value={notes} placeholder="Notes..." size="lg" onChange={onChange}/>
               </FormControl>
               <Button variantColor="teal" width="full" mt={4} type="submit">
-                Submit
-              </Button>
-              <Flex justifyContent="center" alignContent="center" marginTop="15px">
-                <Link to='/signin'>or sign in here</Link>
-              </Flex>      
+                Add Document
+              </Button>     
             </form>
           </Box>
         </Box>
