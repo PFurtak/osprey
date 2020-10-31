@@ -17,7 +17,7 @@ import {
 
 const DocState = (props) => {
   const initialState = {
-    docs: null,
+    docs: [],
     current: null,
     filtered: null,
     error: null,

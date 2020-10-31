@@ -54,8 +54,8 @@ const DocForm = (props) => {
       const onChange = (e) => setDoc({ ...doc, [e.target.name]: e.target.value });
 
       const onSubmit = (e) => {
-        setLoading();
         e.preventDefault();
+        setLoading();
           if (current === null) {
               addDoc(doc);
           } else {
