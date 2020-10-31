@@ -27,7 +27,7 @@ const DocState = (props) => {
   // Get Docs
   const getDocs = async () => {
     try {
-      const res = await axios.get('/api/docs');
+      const res = await axios.get('/api/documents');
       dispatch({ type: GET_DOCS, payload: res.data });
     } catch (err) {
       dispatch({ type: DOC_ERROR, payload: err.response.msg });
@@ -83,7 +83,7 @@ const DocState = (props) => {
     };
 
     try {
-      const res = await axios.put(`/api/docs/${doc._id}`, doc, config);
+      const res = await axios.put(`/api/documents/${doc._id}`, doc, config);
       dispatch({ type: UPDATE_DOC, payload: res.data });
     } catch (err) {
       dispatch({ type: DOC_ERROR, payload: err.response.msg });
