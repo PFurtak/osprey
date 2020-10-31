@@ -108,9 +108,14 @@ const DocForm = (props) => {
                 <FormLabel>Notes</FormLabel>
                 <Textarea name="notes" value={notes} placeholder="Notes..." size="lg" onChange={onChange}/>
               </FormControl>
-              <Button variantColor="teal" width="full" mt={4} type="submit">
-                Add Document
-              </Button>     
+              <Button variantColor="teal" width="full" mt={8} type="submit">
+               <p>{current ? 'Update Document' : 'Add Document'}</p>
+              </Button>
+              {current && (
+                <Button background="blue.500" width="full" mt={4} onClick={clearAll}>
+                <p>Clear Fields</p>
+               </Button>
+              )}     
             </form>
           </Box>
         </Box>
