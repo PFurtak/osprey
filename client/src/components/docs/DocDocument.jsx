@@ -45,8 +45,8 @@ const DocDocument = ({doc}) => {
             </Grid>
             <Box w="100%" mt="8" h="0" fontWeight="700"><p>Notes: </p></Box>
             <Box w="100%" mb="8" mt="8" ><p>{notes}</p></Box>
-            <Button onClick={() => setCurrent(doc)} backgroundColor="green.300" width="100%">Edit</Button>
-            <Button onClick={onDelete} backgroundColor="red.500" color="white" mt="4" width="100%">Delete</Button>
+            <Button onClick={() => setCurrent(doc)} variantColor='teal' width="100%">Edit</Button>
+            <Button onClick={onDelete} variantColor='red' color="white" mt="4" width="100%">Delete</Button>
         </Box>
      </Flex>
         

@@ -15,7 +15,7 @@ import {
 const SignIn = (props) => {
 
   const authContext = useContext(AuthContext);
-  const { login, error, isAuthenticated, setLoading } = authContext;
+  const { login, error, isAuthenticated, setLoading, loading } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -60,7 +60,7 @@ const SignIn = (props) => {
                 <FormLabel>Password</FormLabel>
                 <Input type="password" name="password" value={password} placeholder="*******" size="lg" onChange={onChange} />
               </FormControl>
-              <Button variantColor="teal" width="full" mt={4} type="submit">
+              <Button isLoading={loading} loadingText={"Submitting..."} variantColor="teal" width="full" mt={4} type="submit">
                 Sign In
               </Button>
               <Flex justifyContent="center" alignContent="center" marginTop="15px">
