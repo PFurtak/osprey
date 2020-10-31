@@ -1,6 +1,7 @@
-import React, {useContext} from 'react'
+import React, {Fragment, useContext} from 'react';
 import DocContext from '../../context/doc/docContext';
 import PropTypes from 'prop-types';
+import { Box, Heading, Flex, Badge } from '@chakra-ui/core';
 
 const DocDocument = ({doc}) => {
     const docContext = useContext(DocContext);
@@ -24,7 +25,27 @@ const DocDocument = ({doc}) => {
       };
 
       return (
-          <div>
+        
+        <Flex width="full" align="center" justifyContent="center">
+        <Box p={8} maxW="lg" borderWidth="1px" rounded="lg" borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="20px" marginBottom="20px">
+            <Heading textAlign="center" as="h3" size="lg">{name}</Heading>
+            <Badge>{deviceType}</Badge>
+      <p>Serial Number:  {deviceSerialNumber}</p> {' '}
+      <p>IP Address:  {deviceIP}</p>
+      <p>Location: {deviceLocation}</p>
+      <p>License Start: {licenseStart}</p>
+      <p>Licence Exipration: {licenseExpire}</p>
+      <p>Notes: <br/> {notes}</p>
+        </Box>
+     </Flex>
+        
+        
+
+  
+     
+     
+
+     /*     <div>
               <ul>
       <li>{name}</li>
       <li>{deviceSerialNumber}</li>
@@ -43,6 +64,7 @@ const DocDocument = ({doc}) => {
           Delete
         </button>
           </div>
+          */
       )
 }
 
