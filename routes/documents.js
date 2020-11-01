@@ -58,7 +58,7 @@ router.post(
 router.get('/', auth, async (req, res) => {
   try {
     const documents = await Document.find({}).sort({
-      date: -1,
+      createDate: -1,
     });
     res.json(documents);
   } catch (error) {

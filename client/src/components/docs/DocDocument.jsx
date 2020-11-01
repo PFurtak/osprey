@@ -27,21 +27,21 @@ const DocDocument = ({doc}) => {
       return (
         
         <Flex width="full" align="center" justifyContent="center">
-        <Box p={8} maxW="lg" borderWidth="1px" rounded="lg" borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="20px" marginBottom="20px">
+        <Box backgroundColor="blue.50" p={8} maxW="lg" borderWidth="1px" rounded="lg" borderRadius={8} borderColor="gray" boxShadow="lg" marginTop="20px" marginBottom="20px">
             <Heading textAlign="center" as="h3" size="lg">{name}</Heading>
-            <Badge fontSize="0.9em">{deviceType}</Badge>
+            <Badge borderRadius={3} p={2} backgroundColor="cyan.200" fontSize="0.9em">{deviceType}</Badge>
             <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                 <Box w="100%" mt="3" h="0" fontWeight="700"><p>Serial Number</p></Box>
                 <Box w="100%" mt="3" h="0" fontWeight="700"><p>IP Address</p></Box>
-                <Box w="100%" h="0"><p>{deviceSerialNumber}</p></Box>
-                <Box w="100%" h="0"><p>{deviceIP}</p></Box>
-                <Box w="100%" mt="8" h="0" fontWeight="700"><p>Location</p></Box>
-                <Box w="100%" mt="3" h="0" fontWeight="700"><p>License Start</p></Box>
-                <Box w="100%" h="0"><p>{deviceLocation}</p></Box>
-                <Box w="100%" mt={-5} h="0"><p>{licenseStart}</p></Box>
-                <Box w="100%" mt="3" h="8" fontWeight="700"><p>Licence Exipration</p></Box>
-                <Box w="100%" mt="8"></Box>
-                <Box w="100%" mt={-8} h="0"><p>{licenseExpire}</p></Box>
+                <Box w="100%" h="0" ><p>{deviceSerialNumber}</p></Box>
+                <Box w="100%" h="0" ><p>{deviceIP}</p></Box>
+                <Box w="100%" h="0" mt="3" fontWeight="700"><p>Location</p></Box>
+                <Box w="100%" h="0" mt="3" fontWeight="700"><p>License Start</p></Box>
+                <Box w="100%" h="0" ><p>{deviceLocation}</p></Box>
+                <Box w="100%" h="0" ><p>{licenseStart}</p></Box>
+                <Box w="100%" h="0" mt="3" fontWeight="700"><p>Licence Exipration</p></Box>
+                <Box w="100%" h="0" mt="3"></Box>
+                <Box w="100%" h="0" ><p>{licenseExpire}</p></Box>
             </Grid>
             <Box w="100%" mt="8" h="0" fontWeight="700"><p>Notes: </p></Box>
             <Box w="100%" mb="8" mt="8" ><p>{notes}</p></Box>
