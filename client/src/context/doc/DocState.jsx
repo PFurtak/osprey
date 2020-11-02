@@ -2,7 +2,6 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import DocContext from './docContext';
 import docReducer from './docReducer';
-import moment from 'moment';
 import {
   GET_DOCS,
   CLEAR_DOCS,
@@ -67,8 +66,6 @@ const DocState = (props) => {
 
   // Set current doc
   const setCurrent = (doc) => {
-    doc.licenseStart = moment(doc.licenseStart).format('ll');
-    doc.licenseExpire = moment(doc.licenseExpire).format('ll');
     dispatch({ type: SET_CURRENT, payload: doc });
   };
 

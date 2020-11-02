@@ -2,7 +2,6 @@ import React, {useContext} from 'react';
 import DocContext from '../../context/doc/docContext';
 import PropTypes from 'prop-types';
 import { Box, Heading, Flex, Badge, Grid, Button } from '@chakra-ui/core';
-import moment from 'moment'
 
 const DocDocument = ({doc}) => {
     const docContext = useContext(DocContext);
@@ -39,10 +38,10 @@ const DocDocument = ({doc}) => {
                 <Box w="100%" h="0" mt="3" fontWeight="700"><p>Location</p></Box>
                 <Box w="100%" h="0" mt="3" fontWeight="700"><p>License Start</p></Box>
                 <Box w="100%" h="0" ><p>{deviceLocation}</p></Box>
-                <Box w="100%" h="0" ><p>{moment(licenseStart).format('ll')}</p></Box>
+                <Box w="100%" h="0" ><p>{licenseStart}</p></Box>
                 <Box w="100%" h="0" mt="3" fontWeight="700"><p>Licence Exipration</p></Box>
                 <Box w="100%" h="0" mt="3"></Box>
-                <Box w="100%" h="0" ><p>{moment(licenseExpire).format('ll')}</p></Box>
+                <Box w="100%" h="0" ><p>{licenseExpire}</p></Box>
             </Grid>
             <Box w="100%" mt="8" h="0" fontWeight="700"><p>Notes: </p></Box>
             <Box w="100%" mb="8" mt="8" ><p>{notes}</p></Box>
