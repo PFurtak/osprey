@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Document = require('../models/DocumentModel');
+const moment = require('moment');
 
 // Post route for documents /api/documents
 // Create a new document
@@ -57,9 +58,16 @@ router.post(
 // Gets all documents for logged in users
 router.get('/', auth, async (req, res) => {
   try {
-    const documents = await Document.find({}).sort({
-      date: -1,
+    const documents = await Document.find({}).lean().sort({
+      createDate: -1,
     });
+
+    // Normalize dates
+    documents.forEach((doc) => {
+      doc.licenseStart = moment(doc.licenseStart).format('ll');
+      doc.licenseExpire = moment(doc.licenseExpire).format('ll');
+    });
+
     res.json(documents);
   } catch (error) {
     console.error(error.message);
@@ -101,7 +109,20 @@ router.put('/:id', auth, async (req, res) => {
       { $set: documentFields },
       { new: true }
     );
-    res.json(document);
+
+    // Mongoose docs state you shouldnt use lean() on PUT requests,
+    // so a copy of the data returned from Mongo,
+    // then modified and sent to client
+    let normalizedDoc = [];
+    normalizedDoc.push(JSON.parse(JSON.stringify(document)));
+
+    // Normalize dates
+    normalizedDoc.forEach((doc) => {
+      doc.licenseStart = moment(doc.licenseStart).format('ll');
+      doc.licenseExpire = moment(doc.licenseExpire).format('ll');
+    });
+
+    res.json(normalizedDoc[0]);
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Server error.');

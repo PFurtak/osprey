@@ -98,11 +98,11 @@ const DocForm = (props) => {
               </FormControl>
               <FormControl mt={3}>
                 <FormLabel>License Start Date</FormLabel>
-                <Input type="text" name="licenseStart" value={licenseStart} placeholder="12/12/2027" size="lg" onChange={onChange}/>
+                <Input type="text" name="licenseStart" value={licenseStart} placeholder="Mar 22, 2233" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3}>
                 <FormLabel>License End Date</FormLabel>
-                <Input type="text" name="licenseExpire" value={licenseExpire} placeholder="12/12/2030" size="lg" onChange={onChange}/>
+                <Input type="text" name="licenseExpire" value={licenseExpire} placeholder="Mar 22, 2238" size="lg" onChange={onChange}/>
               </FormControl>
               <FormControl mt={3}>
                 <FormLabel>Notes</FormLabel>
