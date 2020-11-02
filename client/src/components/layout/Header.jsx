@@ -1,6 +1,10 @@
-import React from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Link } from 'react-router-dom';
 import { Box, Heading, Flex, Text, Button } from "@chakra-ui/core";
+import AuthContext from '../../context/auth/authContext';
+import DocContext from '../../context/doc/docContext';
+
+
 
 const MenuItems = ({ children }) => (
   <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
@@ -8,9 +12,51 @@ const MenuItems = ({ children }) => (
   </Text>
 );
 
+
+
 const Header = props => {
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
+
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, user, logout } = authContext;
+
+  const docContext = useContext(DocContext);
+  const {clearDocs} = docContext;
+
+  const onLogout = () => {
+    logout();
+    clearDocs();
+  }
+
+  const authLinks = (
+    <Fragment>
+    <span> Welcome, {user && user.firstName}!  </span>
+      <span>
+        <a onClick={onLogout} href='#!'>
+        <Button variantColor="teal" border="1px">
+           Sign Out 
+        </Button>
+        </a>
+        </span>
+    </Fragment>
+  )
+
+  const guestLinks = (
+    <Fragment>
+      <Link to='/signup'>
+        <Button variantColor="teal" border="1px" marginRight="10px">
+           Sign Up 
+        </Button>
+        </Link>
+
+        <Link to='/signin'>
+        <Button variantColor="teal" border="1px">
+           Sign In 
+        </Button>
+        </Link>
+    </Fragment>
+  )
 
   return (
     <Flex
@@ -56,17 +102,10 @@ const Header = props => {
         display={{ sm: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Link to='/signup'>
-        <Button variantColor="teal" border="1px" marginRight="10px">
-           Sign Up 
-        </Button>
-        </Link>
-
-        <Link to='/signin'>
-        <Button variantColor="teal" border="1px">
-           Sign In 
-        </Button>
-        </Link>
+        <Fragment>
+          {isAuthenticated ? authLinks : guestLinks}
+        </Fragment>
+        
       </Box>
     </Flex>
   );
