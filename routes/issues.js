@@ -4,6 +4,7 @@ const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const Issue = require('../models/IssueModel');
 const User = require('../models/UserModel');
+const moment = require('moment');
 
 // Post route for issues /api/issues
 router.post(
@@ -54,9 +55,21 @@ router.post(
 // GET all issues
 router.get('/', auth, async (req, res) => {
   try {
-    const issues = await Issue.find({}).sort({
+    const issues = await Issue.find({}).lean().sort({
       date: -1,
     });
+
+    // Normalize dates
+    issues.forEach((issue) => {
+      issue.issueDate = moment(issue.issueDate).format('ll');
+
+      if (issue.comments) {
+        issue.comments.forEach((comment) => {
+          comment.date = moment(comment.date).format('ll');
+        });
+      }
+    });
+
     res.json(issues);
   } catch (error) {
     console.error(error.message);
